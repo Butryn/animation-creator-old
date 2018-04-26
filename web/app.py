@@ -1,20 +1,28 @@
-
+\
 from flask import Flask
-from flask import render_template
+from flask import render_template, regues
+from media.s3t
 
 app = Flask(__name__)
+
 
 @app.route("/")
 def hello():
     return render_template(
       'upload_files.html'
 )
-@app.route("/upload", methods='POST')
+@app.route("/upload", methods=['POST'])
 def handle_upload():
-  if request.method == 'POST':
-    f = request.files['file']
-    f.save(secure_filename(f.filename))
-    return 'file uploaded successfully'
+    if 'uploaded_file' not in request.files:
+     flash('No file part')
+    return redirect(request.url)
+
+   uploaded_file = request.files[uploaded_file]
+   media_storage.store(
+       dest="/uploaded/%s uploaded_file.silename," 
+       sourde= uploaded_file
+   )   
+return 'file uploaded successfully'
 
 @app.route("/make-animation")
 def make_animation():
